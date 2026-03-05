@@ -8,8 +8,40 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sarabun);
+  --font-mono: var(--font-sarabun);
+  --font-sarabun: var(--font-sarabun);
+
+  --color-surface: #ffffff;
+  --color-accent: #03dac4;
+  --color-error: #B00020;
+  --color-success: #4CCCAF;
+  --color-text: #000000;
+  --color-errorText: #EE685E;
+  --color-onSurface: #000000;
+  --color-g50: #eaeaea;
+  --color-g75: #a9a9a9;
+  --color-g100: #868686;
+  --color-g200: #525252;
+  --color-g300: #2e2e2e;
+  --color-g400: #202020;
+  --color-g500: #1c1c1c;
+  --color-v50: #f9f7ff;
+  --color-v75: #e4ddfd;
+  --color-v100: #d9cffc;
+  --color-v200: #c9bbfb;
+  --color-v300: #BEADFA;
+  --color-v400: #8579af;
+  --color-v500: #746a99;
+  --color-violet: #8979FF;
+  --color-coral: #FF928A;
+  --color-cyan: #3CC3DF;
+  --color-amber: #FFAE4C;
+  --color-disabled: rgba(0, 0, 0, 0.38);
+  --color-placeholder: rgba(0, 0, 0, 0.54);
+  --color-backdrop: rgba(0, 0, 0, 0.5);
+  --color-glassBackground: rgba(255, 255, 255, 0.1);
+  --color-glassBorder: rgba(255, 255, 255, 0.15);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +54,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sarabun), Arial, Helvetica, sans-serif;
 }
