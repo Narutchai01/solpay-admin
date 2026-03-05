@@ -1,53 +1,80 @@
 'use client';
 
-import React, { InputHTMLAttributes, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import { TextField, InputAdornment, Box, Typography, TextFieldProps } from '@mui/material';
+import { Theme as CustomTheme } from '@/theme/theme';
 
-interface InputWithIconProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputWithIconProps = Omit<TextFieldProps, 'variant' | 'label'> & {
   label: string;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-}
+};
 
 export default function InputWithIcon({
   label,
   leftIcon,
   rightIcon,
-  className = '',
+  error,
+  helperText,
   ...props
 }: InputWithIconProps) {
   return (
-    <div className={styles.wrapper}>
-      <label className={styles.label}>
+    <Box sx={{ width: '100%', mb: 2 }}>
+      <Typography 
+        variant="body2" 
+        sx={{ 
+          fontWeight: 600, 
+          color: CustomTheme.colors.g500, 
+          mb: 0.5, 
+          ml: 0.5 
+        }}
+      >
         {label}
-      </label>
-      
-      <div className={styles.inputContainer}>
-        {leftIcon && (
-          <div className={styles.leftIcon}>
-            {leftIcon}
-          </div>
-        )}
-        
-        <input
-          {...props}
-          className={`${styles.inputBase} ${leftIcon ? 'pl-10' : ''} ${rightIcon ? 'pr-10' : ''} ${className}`}
-        />
-        
-        {rightIcon && (
-          <div className={styles.rightIcon}>
-            {rightIcon}
-          </div>
-        )}
-      </div>
-    </div>
+      </Typography>
+      <TextField
+        {...props}
+        variant="outlined"
+        fullWidth
+        error={error}
+        helperText={helperText}
+        InputProps={{
+          startAdornment: leftIcon ? (
+            <InputAdornment position="start">
+              <Box sx={{ color: CustomTheme.colors.g100, display: 'flex', alignItems: 'center' }}>
+                {leftIcon}
+              </Box>
+            </InputAdornment>
+          ) : null,
+          endAdornment: rightIcon ? (
+            <InputAdornment position="end">
+              <Box sx={{ color: CustomTheme.colors.g100, display: 'flex', alignItems: 'center' }}>
+                {rightIcon}
+              </Box>
+            </InputAdornment>
+          ) : null,
+          sx: {
+            bgcolor: '#C0C0C0',
+            borderRadius: 3,
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: 'none',
+            },
+            '&:hover': {
+              bgcolor: '#D1D1D1',
+            },
+            '&.Mui-focused': {
+              bgcolor: '#D1D1D1',
+            },
+            '& input': {
+              py: 1.5,
+              color: CustomTheme.colors.g500,
+              '&::placeholder': {
+                color: CustomTheme.colors.g100,
+                opacity: 1,
+              }
+            }
+          }
+        }}
+      />
+    </Box>
   );
 }
-
-const styles = {
-  wrapper: 'w-full space-y-1.5',
-  label: 'block text-sm font-semibold text-gray-700 ml-1',
-  inputContainer: 'relative flex items-center w-full',
-  leftIcon: 'absolute left-3 text-g500 flex items-center pointer-events-none',
-  rightIcon: 'absolute right-3 flex items-center text-g500',
-  inputBase: 'w-full bg-[#C0C0C0] text-gray-800 placeholder-g500 rounded-xl py-3 px-4 outline-none focus:bg-gray-200',
-};

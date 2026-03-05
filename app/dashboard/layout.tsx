@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { Sidebar } from '@/components/layout/Sidebar';
 
 export default function DashboardLayout({
@@ -7,11 +8,19 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-surface">
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
       <Sidebar />
-      <main className="flex-1 ml-64 p-8">
+      <Box 
+        component="main" 
+        sx={{ 
+          flexGrow: 1, 
+          ml: '256px', // Sidebar width
+          p: 4,
+          minHeight: '100vh'
+        }}
+      >
         {children}
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 }
