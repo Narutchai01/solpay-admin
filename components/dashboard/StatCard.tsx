@@ -1,25 +1,35 @@
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 import { Card } from '@/components/ui/Card';
+import { Theme as CustomTheme } from '@/theme/theme';
 
 interface StatCardProps {
   label: string;
   value: string;
 }
 
-export const StatCard: React.FC<StatCardProps> = ({ label, value }) => {
+export function StatCard({ label, value }: StatCardProps) {
   return (
-    <Card className={styles.card}>
-      <div className={styles.wrapper}>
-        <span className={styles.label}>{label}</span>
-        <span className={styles.value}>{value}</span>
-      </div>
+    <Card sx={{ bgcolor: CustomTheme.colors.v100, border: 'none' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            color: CustomTheme.colors.g500, 
+          }}
+        >
+          {label}
+        </Typography>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            color: CustomTheme.colors.g500, 
+            fontWeight: 700 
+          }}
+        >
+          {value}
+        </Typography>
+      </Box>
     </Card>
   );
-};
-
-const styles = {
-  card: 'bg-v100 border-none',
-  wrapper: 'flex flex-col gap-3',
-  label: 'text-base font-normal tracking-wider text-g500',
-  value: 'text-2xl font-bold text-g500',
-};
+}

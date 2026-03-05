@@ -23,6 +23,8 @@ export const metadata: Metadata = {
   description: "Secure payment management system",
 };
 
+import ThemeRegistry from "@/components/ThemeRegistry";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +35,9 @@ export default function RootLayout({
       <body
         className={`${sarabun.variable} ${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        {children}
+        <ThemeRegistry>
+          {children}
+        </ThemeRegistry>
       </body>
     </html>
   );

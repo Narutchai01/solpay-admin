@@ -1,40 +1,67 @@
 import React from 'react';
 import Image from 'next/image';
+import { Box, Paper } from '@mui/material';
 import LoginForm from '@/components/LoginForm';
 import LoginImage from '@/assets/images/login-image.png';
+import { Theme } from '@/theme/theme';
 
 export default function LoginPage() {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.card}>
-        
+    <Box
+      sx={{
+        minHeight: '100vh',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Theme.colors.v75, 
+        padding: { xs: 2, md: 4 },
+      }}
+    >
+      <Paper
+        elevation={12} 
+        sx={{
+          width: '100%',
+          maxWidth: '1024px',
+          backgroundColor: 'background.paper',
+          borderRadius: '2rem',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+        }}
+      >
         {/* Left Section */}
-        <div className={styles.leftPanel}>
+        <Box
+          sx={{
+            position: 'relative',
+            width: { xs: '100%', md: '50%' },
+            minHeight: { xs: '300px', md: '600px' },
+          }}
+        >
           <Image
             src={LoginImage}
             alt="Login Image"
             fill
             priority
-            className={styles.image}
+            style={{ objectFit: 'cover' }} 
           />
-        </div>
+        </Box>
 
         {/* Right Section */}
-        <div className={styles.rightPanel}>
+        <Box
+          sx={{
+            width: { xs: '100%', md: '50%' },
+            backgroundColor: 'background.paper',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: { xs: 0, md: 2 },
+          }}
+        >
           <LoginForm />
-        </div>
-
-      </div>
-    </div>
+        </Box>
+      </Paper>
+    </Box>
   );
 }
-
-const styles = {
-  wrapper: 'min-h-screen w-full flex items-center justify-center bg-v75 p-4 md:p-8',
-  card: 'w-full max-w-5xl bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row',
-  // Left Panel
-  leftPanel: 'relative w-full md:w-1/2 min-h-[300px] md:min-h-[600px]',
-  image: 'object-cover',
-  // Right Panel
-  rightPanel: 'w-full md:w-1/2 bg-white flex flex-col items-center justify-center  md:p-4',
-};
