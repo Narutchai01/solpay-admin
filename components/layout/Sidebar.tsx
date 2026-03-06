@@ -1,17 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { menuItems } from '@/constants/menu';
 import { LogOut } from 'lucide-react';
 import Image from 'next/image';
 import LogoAdminImage from '@/assets/images/logo-admin.png';
 import { Box, Typography, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Theme as CustomTheme } from '@/theme/theme';
+import { ModalComponent } from '../ui/Modal';
+import { Theme } from '@/theme/theme';
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalOpen(false);
+    router.push('/login');
+  };
 
   return (
     <Box 
@@ -19,8 +27,8 @@ export function Sidebar() {
       sx={{ 
         width: 256, 
         height: '100vh', 
-        bgcolor: CustomTheme.colors.surface, 
-        borderRight: '1px solid #E5E7EB',
+        bgcolor: Theme.colors.surface, 
+        borderRight: `1px solid ${Theme.colors.g50}`,
         display: 'flex',
         flexDirection: 'column',
         py: 4,
@@ -50,18 +58,18 @@ export function Sidebar() {
           const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href));
           
           return (
-            <ListItem key={item.name} disablePadding sx={{ borderLeft: '4px solid', borderColor: isActive ? CustomTheme.colors.v500 : 'transparent' }}>
+            <ListItem key={item.name} disablePadding sx={{ borderLeft: '4px solid', borderColor: isActive ? Theme.colors.v500 : 'transparent' }}>
               <ListItemButton 
                 component={Link} 
                 href={item.href}
                 sx={{ 
-                  bgcolor: isActive ? CustomTheme.colors.v100 : 'transparent',
-                  color: isActive ? CustomTheme.colors.v500 : CustomTheme.colors.g500,
+                  bgcolor: isActive ? Theme.colors.v100 : 'transparent',
+                  color: isActive ? Theme.colors.v500 : Theme.colors.g500,
                   py: 1.5,
                   px: 3.5,
                   '&:hover': {
-                    bgcolor: CustomTheme.colors.v100,
-                    color: CustomTheme.colors.v500,
+                    bgcolor: Theme.colors.v100,
+                    color: Theme.colors.v500,
                   }
                 }}
               >
@@ -86,22 +94,32 @@ export function Sidebar() {
         <Button 
           fullWidth
           startIcon={<LogOut size={24} />}
+          onClick={() => setIsLogoutModalOpen(true)}
           sx={{ 
             justifyContent: 'flex-start',
-            color: CustomTheme.colors.g100,
+            color: Theme.colors.g100,
             py: 1.5,
             px: 2,
             borderRadius: 3,
             textTransform: 'none',
             '&:hover': {
-              bgcolor: CustomTheme.colors.v300,
-              color: CustomTheme.colors.g500,
+              bgcolor: Theme.colors.v300,
+              color: Theme.colors.g500,
             }
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 600 }}>Log Out</Typography>
         </Button>
       </Box>
+
+      <ModalComponent
+        visible={isLogoutModalOpen}
+        title="Are you sure you want to log out?"
+        cancelLabel="Cancel"
+        confirmLabel="Log Out"
+        onCancel={() => setIsLogoutModalOpen(false)}
+        onConfirm={handleConfirmLogout}
+      />
     </Box>
   );
 };
