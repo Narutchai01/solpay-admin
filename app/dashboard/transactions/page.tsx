@@ -1,80 +1,229 @@
-import React from "react";
-import { Box, Typography, Grid, Chip } from "@mui/material";
-import { TableComponent, Column } from "@/components/dashboard/Table"; 
+"use client";
+
+import React, { useState, useMemo } from "react";
+import { Box, Typography, Grid, Tabs, Tab } from "@mui/material";
+import { TableComponent, Column } from "@/components/dashboard/Table";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { Theme } from "@/theme/theme";
 
 type Transaction = {
   id: string;
   transId: string;
-  userId: string; 
+  userId: string;
   type: string;
   amountUsdt: string;
   amountThb: string;
   feeUsdt: string;
   date: string;
   status: string;
+  source: string;
 };
 
 const transactionColumns: Column<Transaction>[] = [
-  { 
-    id: 'transId', 
-    label: 'Transaction ID',
-    renderCell: (row) => <span style={{ fontWeight: 600 }}>{row.transId}</span>
+  {
+    id: "transId",
+    label: "Transaction ID",
+    renderCell: (row) => <span>{row.transId}</span>,
   },
-  { 
-    id: 'userId', 
-    label: 'User ID' 
+  {
+    id: "userId",
+    label: "User ID",
   },
-  { 
-    id: 'type', 
-    label: 'Type',
+  {
+    id: "type",
+    label: "Type",
+  },
+  { id: "amountUsdt", label: "USDT Amount" },
+  { id: "amountThb", label: "THB Amount" },
+  { id: "feeUsdt", label: "Fee" },
+  { id: "date", label: "Date" },
+  {
+    id: "status",
+    label: "Status",
     renderCell: (row) => (
-      <Chip 
-        label={row.type} 
-        size="small"
-        sx={{ 
-          bgcolor: row.type === 'Deposit' ? '#D1FAE5' : '#DBEAFE',
-          color: row.type === 'Deposit' ? '#047857' : '#1D4ED8',
-          fontWeight: 700, 
-          fontSize: '0.75rem'
-        }} 
-      />
-    )
-  },
-  { id: 'amountUsdt', label: 'USDT Amount', renderCell: (row) => <strong style={{ color: '#111827' }}>{row.amountUsdt}</strong> },
-  { id: 'amountThb', label: 'THB Amount', renderCell: (row) => <strong style={{ color: '#111827' }}>{row.amountThb}</strong> },
-  { id: 'feeUsdt', label: 'Fee' },
-  { id: 'date', label: 'Date' },
-  { 
-    id: 'status', 
-    label: 'Status',
-    renderCell: (row) => (
-      <Chip 
-        label={row.status} 
-        size="small"
-        sx={{ 
-          bgcolor: row.status === 'Success' ? '#D1FAE5' : '#FEE2E2',
-          color: row.status === 'Success' ? '#047857' : '#B91C1C',
-          fontWeight: 700, 
-          fontSize: '0.75rem'
-        }} 
-      />
-    )
+      <span
+        style={{
+          color:
+            row.status === "Success"
+              ? Theme.colors.success
+              : Theme.colors.errorText,
+          fontWeight: 600,
+        }}
+      >
+        {row.status}
+      </span>
+    ),
   },
 ];
 
 const mockTransactions: Transaction[] = [
-  { id: '1', transId: 'TX123456789', userId: 'USER-001', type: 'Deposit', amountUsdt: '1000.00', amountThb: '35000.00', feeUsdt: '1.00', date: '2023-10-01', status: 'Success' },
-  { id: '2', transId: 'TX987654321', userId: 'USER-002', type: 'Withdrawal', amountUsdt: '500.00', amountThb: '17500.00', feeUsdt: '0.50', date: '2023-10-02', status: 'Success' },
-  { id: '3', transId: 'TX456123789', userId: 'USER-003', type: 'Deposit', amountUsdt: '2000.00', amountThb: '70000.00', feeUsdt: '2.00', date: '2023-10-03', status: 'Failed' },
-  { id: '4', transId: 'TX789456123', userId: 'USER-004', type: 'Deposit', amountUsdt: '1500.00', amountThb: '52500.00', feeUsdt: '1.50', date: '2023-10-04', status: 'Success' },
-  { id: '5', transId: 'TX321654987', userId: 'USER-005', type: 'Withdrawal', amountUsdt: '300.00', amountThb: '10500.00', feeUsdt: '0.30', date: '2023-10-05', status: 'Success' },
+  {
+    id: "1",
+    transId: "001",
+    userId: "Uppt255d",
+    type: "Top up",
+    amountUsdt: "10,000.00",
+    amountThb: "10,000.00",
+    feeUsdt: "326.00",
+    date: "03 Dec 25, 1:08 PM",
+    status: "Success",
+    source: "On App",
+  },
+  {
+    id: "2",
+    transId: "002",
+    userId: "Uput256d",
+    type: "Transfer",
+    amountUsdt: "20,000.00",
+    amountThb: "10,000.00",
+    feeUsdt: "963.00",
+    date: "03 Dec 25, 1:08 PM",
+    status: "Success",
+    source: "Software Wallet",
+  },
+  {
+    id: "3",
+    transId: "003",
+    userId: "Uppt256d",
+    type: "Transfer",
+    amountUsdt: "5,000.00",
+    amountThb: "5,000.00",
+    feeUsdt: "125.00",
+    date: "03 Dec 25, 1:08 PM",
+    status: "Success",
+    source: "On App",
+  },
+  {
+    id: "4",
+    transId: "004",
+    userId: "Uppt152d",
+    type: "Top up",
+    amountUsdt: "2,000.00",
+    amountThb: "5,000.00",
+    feeUsdt: "98.00",
+    date: "02 Dec 25, 1:08 PM",
+    status: "Success",
+    source: "Software Wallet",
+  },
+  {
+    id: "5",
+    transId: "005",
+    userId: "Uppt026d",
+    type: "Transfer",
+    amountUsdt: "500.00",
+    amountThb: "500.00",
+    feeUsdt: "36.00",
+    date: "02 Dec 25, 2:08 PM",
+    status: "Failed",
+    source: "On App",
+  },
+  {
+    id: "6",
+    transId: "006",
+    userId: "Uppt260d",
+    type: "Top up",
+    amountUsdt: "9,000.00",
+    amountThb: "9,000.00",
+    feeUsdt: "300.00",
+    date: "02 Dec 25, 1:08 PM",
+    status: "Failed",
+    source: "On App",
+  },
+  {
+    id: "7",
+    transId: "007",
+    userId: "Uppt290d",
+    type: "Transfer",
+    amountUsdt: "700.00",
+    amountThb: "700.00",
+    feeUsdt: "156.00",
+    date: "02 Dec 25, 1:23 PM",
+    status: "Success",
+    source: "Software Wallet",
+  },
+  {
+    id: "8",
+    transId: "008",
+    userId: "Uppt365d",
+    type: "Transfer",
+    amountUsdt: "500.00",
+    amountThb: "500.00",
+    feeUsdt: "36.00",
+    date: "01 Dec 25, 1:08 PM",
+    status: "Success",
+    source: "On App",
+  },
+  {
+    id: "9",
+    transId: "009",
+    userId: "Uppt256d",
+    type: "Top up",
+    amountUsdt: "2,000.00",
+    amountThb: "2,000.00",
+    feeUsdt: "263.00",
+    date: "28 Nov 25, 1:08 PM",
+    status: "Failed",
+    source: "Software Wallet",
+  },
+  {
+    id: "10",
+    transId: "010",
+    userId: "Uppt256d",
+    type: "Transfer",
+    amountUsdt: "500.00",
+    amountThb: "500.00",
+    feeUsdt: "23.00",
+    date: "27 Nov 25, 1:08 PM",
+    status: "Success",
+    source: "On App",
+  },
+  {
+    id: "11",
+    transId: "011",
+    userId: "Uppt256d",
+    type: "Swap",
+    amountUsdt: "2,000.00",
+    amountThb: "2,000.00",
+    feeUsdt: "292.00",
+    date: "26 Nov 25, 1:08 PM",
+    status: "Failed",
+    source: "Software Wallet",
+  },
+  {
+    id: "12",
+    transId: "012",
+    userId: "Uppt256d",
+    type: "Swap",
+    amountUsdt: "500.00",
+    amountThb: "500.00",
+    feeUsdt: "36.00",
+    date: "25 Nov 25, 1:08 PM",
+    status: "Failed",
+    source: "On App",
+  },
 ];
 
 export default function TransactionsPage() {
+  const [activeTab, setActiveTab] = useState("all");
+
+  const filteredTransactions = useMemo(() => {
+    if (activeTab === "all") return mockTransactions;
+    if (activeTab === "on_app")
+      return mockTransactions.filter((tx) => tx.source === "On App");
+    if (activeTab === "software_wallet")
+      return mockTransactions.filter((tx) => tx.source === "Software Wallet");
+    return mockTransactions;
+  }, [activeTab]);
+
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h1" sx={{ fontWeight: 700 }}>
           Transactions
         </Typography>
@@ -95,11 +244,54 @@ export default function TransactionsPage() {
         </Grid>
       </Grid>
 
-      <Typography variant="h2" sx={{ fontWeight: 700 }}>
-        Transaction Summary
-      </Typography>
-      
-      <TableComponent columns={transactionColumns} data={mockTransactions} />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          mt: 2,
+        }}
+      >
+        <Typography variant="h2" sx={{ fontWeight: 700 }}>
+          Transaction Summary
+        </Typography>
+
+        <Tabs
+          value={activeTab}
+          onChange={(_, newValue) => setActiveTab(newValue)}
+          textColor="inherit"
+          slotProps={{
+            indicator: {
+              sx: { backgroundColor: Theme.colors.v400, height: "3px" },
+            },
+          }}
+          sx={{
+            minHeight: "auto",
+            "& .MuiTab-root": {
+              textTransform: "none",
+              fontSize: Theme.fontSize.h6,
+              fontWeight: 600,
+              color: Theme.colors.g200,
+              padding: "8px 24px",
+              minHeight: "auto",
+              "&.Mui-selected": {
+                color: Theme.colors.g500,
+              },
+            },
+          }}
+        >
+          <Tab label="All" value="all" />
+          <Tab label="On App" value="on_app" />
+          <Tab label="Software Wallet" value="software_wallet" />
+        </Tabs>
+      </Box>
+
+      <TableComponent
+        key={activeTab}
+        columns={transactionColumns}
+        data={filteredTransactions}
+        rowsPerPage={10}
+      />
     </Box>
   );
 }
