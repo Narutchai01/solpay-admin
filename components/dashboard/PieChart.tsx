@@ -31,9 +31,9 @@ interface CustomLegendProps {
 }
 
 const data = [
-  { name: "USDT", value: 70, fill: Theme.colors.v400 },
-  { name: "BTC", value: 10, fill: Theme.colors.v75 },
-  { name: "SQL", value: 20, fill: Theme.colors.v300 },
+  { name: "USDT", value: 70, fill: Theme.colors.cyan },
+  { name: "BTC", value: 10, fill: Theme.colors.coral },
+  { name: "SQL", value: 20, fill: Theme.colors.amber },
 ];
 
 const renderCustomizedLabel = (props: CustomLabelProps) => {
