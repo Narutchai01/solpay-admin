@@ -80,9 +80,6 @@ export default function PoolManagementPage() {
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <StatCard label="Utilization" value="2,000.00" />
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <StatCard label="Utilization" value="%" />
-        </Grid>
       </Grid>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
