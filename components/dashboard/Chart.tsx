@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Box } from '@mui/material';
 import { Card } from '@/components/ui/Card';
 import { Dropdown } from '@/components/ui/Dropdown';
 import {
@@ -14,6 +15,7 @@ import {
   ResponsiveContainer,
   LabelList,
 } from 'recharts';
+import { Theme } from '@/theme/theme';
 
 const mockChartData = [
   { day: '01', deposit: 41.52, withdraw: 63.39 },
@@ -54,7 +56,7 @@ const YEAR_OPTIONS = Array.from({ length: 4 }, (_, i) => {
   return { value: yearStr, label: yearStr };
 });
 
-export const Chart: React.FC = () => {
+export function Chart() {
   const [selectedMonth, setSelectedMonth] = useState(String(new Date().getMonth() + 1).padStart(2, '0'));
   const [selectedYear, setSelectedYear] = useState(String(currentYear));
 
@@ -63,9 +65,9 @@ export const Chart: React.FC = () => {
   };
 
   return (
-    <Card className={styles.card}>
+    <Card sx={{ height: 500, width: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Dropdowns */}
-      <div className={styles.filterGroup}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', gap: 1.5, mb: 4 }}>
         <Dropdown
           options={MONTHS}
           value={selectedMonth}
@@ -83,27 +85,27 @@ export const Chart: React.FC = () => {
             handleFilterChange();
           }}
         />
-      </div>
+      </Box>
 
       {/* Chart Area */}
-      <div className={styles.chartContainer}>
+     <Box sx={{ height: 400, width: '100%', paddingBottom: 2 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={mockChartData}
             margin={{ top: 20, right: 20, left: -20, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={Theme.colors.g50} />
             <XAxis 
               dataKey="day" 
               axisLine={false} 
               tickLine={false} 
-              tick={{ fill: '#6B7280', fontSize: 12 }} 
+              tick={{ fill: Theme.colors.g300, fontSize: 12 }} 
               dy={10}
             />
             <YAxis 
               axisLine={false} 
               tickLine={false} 
-              tick={{ fill: '#6B7280', fontSize: 12 }} 
+              tick={{ fill: Theme.colors.g300, fontSize: 12 }} 
             />
             <Tooltip 
               contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
@@ -117,35 +119,28 @@ export const Chart: React.FC = () => {
               type="monotone"
               dataKey="deposit"
               name="Deposit"
-              stroke="#8579af" 
+              stroke={Theme.colors.v300} 
               strokeWidth={2}
-              dot={{ r: 4, strokeWidth: 2, fill: '#fff' }}
-              activeDot={{ r: 6, strokeWidth: 0, fill: '#8579af' }}
+              dot={{ r: 4, strokeWidth: 2, fill: Theme.colors.surface }}
+              activeDot={{ r: 6, strokeWidth: 0, fill: Theme.colors.v300 }}
             >
-              <LabelList dataKey="deposit" position="top" fill="#6B7280" fontSize={11} offset={10} />
+              <LabelList dataKey="deposit" position="top" fill={Theme.colors.g300} fontSize={11} offset={10} />
             </Line>
 
             <Line
               type="monotone"
               dataKey="withdraw"
               name="Withdraw"
-              stroke="#FF928A"
+              stroke={Theme.colors.coral}
               strokeWidth={2}
-              dot={{ r: 4, strokeWidth: 2, fill: '#fff' }}
-              activeDot={{ r: 6, strokeWidth: 0, fill: '#FF928A' }}
+              dot={{ r: 4, strokeWidth: 2, fill: Theme.colors.surface }}
+              activeDot={{ r: 6, strokeWidth: 0, fill: Theme.colors.coral }}
             >
-              <LabelList dataKey="withdraw" position="top" fill="#6B7280" fontSize={11} offset={10} />
+              <LabelList dataKey="withdraw" position="top" fill={Theme.colors.g300} fontSize={11} offset={10} />
             </Line>
           </LineChart>
         </ResponsiveContainer>
-      </div>
+      </Box>
     </Card>
   );
-};
-
-const styles = {
-  card: 'h-[500px] w-full p-6 flex flex-col',
-  title: 'font-bold text-lg text-gray-900',
-  filterGroup: 'flex justify-end items-end gap-3 mb-4',
-  chartContainer: 'flex-1 w-full h-full'
 };

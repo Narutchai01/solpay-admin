@@ -1,31 +1,36 @@
 import React from 'react';
+import { Box, Typography, Grid } from '@mui/material';
 import { StatCard } from '@/components/dashboard/StatCard';
 import { Chart } from '@/components/dashboard/Chart';
 
 export default function DashboardPage() {
   return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.title}>Overview</h1>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <Typography variant="h1" sx={{ fontWeight: 700 }}>
+        Overview
+      </Typography>
        
-      <div className={styles.statsGrid}>
-        <StatCard label="Total USDT" value="100,000.00" />
-        <StatCard label="Total THB" value="8,000.00" />
-        <StatCard label="Total Fee (USDT)" value="10,000.00" />
-        <StatCard label="Monthly Transaction" value="150" />
-      </div>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <StatCard label="Total USDT" value="100,000.00" />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <StatCard label="Total THB" value="8,000.00" />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <StatCard label="Total Fee (USDT)" value="10,000.00" />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <StatCard label="Monthly Transaction" value="150" />
+        </Grid>
+      </Grid>
 
-      <div className={styles.chartSection}>
-         <h2 className={styles.subTitle}>Monthly Summary</h2>
+      <Box sx={{ mt: 4 }}>
+        <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+          Monthly Summary
+        </Typography>
         <Chart />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
-
-const styles = {
-  wrapper: 'space-y-8 animate-in fade-in duration-500',
-  title: 'text-4xl font-bold text-onSurface tracking-tight',
-  statsGrid: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6',
-  chartSection: 'grid grid-cols-1 gap-8',
-  subTitle: 'text-3xl font-bold text-onSurface tracking-tight',
-};

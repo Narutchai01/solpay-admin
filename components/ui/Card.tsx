@@ -1,15 +1,23 @@
 import React from 'react';
+import { Card as MuiCard, CardContent, SxProps, Theme } from '@mui/material';
 
 interface CardProps {
   children: React.ReactNode;
   className?: string;
   padding?: boolean;
+  sx?: SxProps<Theme>;
 }
 
-export const Card: React.FC<CardProps> = ({ children, className = '', padding = true }) => {
+export function Card({ children, padding = true, sx }: CardProps) {
   return (
-    <div className={`rounded-2xl shadow-sm border border-gray-100 ${padding ? 'p-6' : ''} ${className}`}>
-      {children}
-    </div>
+    <MuiCard sx={{ ...sx }}>
+      {padding ? (
+        <CardContent sx={{ p: 3, '&:last-child': { pb: 3 } }}>
+          {children}
+        </CardContent>
+      ) : (
+        children
+      )}
+    </MuiCard>
   );
 };

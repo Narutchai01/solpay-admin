@@ -1,5 +1,7 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { Theme } from '@/theme/theme';
 
 export default function DashboardLayout({
   children,
@@ -7,11 +9,19 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-surface">
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: Theme.colors.surface }}>
       <Sidebar />
-      <main className="flex-1 ml-64 p-8">
+      <Box 
+        component="main" 
+        sx={{ 
+          flexGrow: 1, 
+          ml: '256px', 
+          p: 4,
+          minHeight: '100vh'
+        }}
+      >
         {children}
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 }
