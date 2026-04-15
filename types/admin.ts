@@ -1,10 +1,3 @@
-export interface AdminData {
-  id: number;
-  username: string;
-  created_at: string;
-  updated_at: string;
-}
-
 interface BaseResponse<T> {
   code: number;
   message: string;
@@ -13,7 +6,6 @@ interface BaseResponse<T> {
 }
 
 export type LoginResponse = BaseResponse<{ token: string }>;
-export type AdminProfileResponse = BaseResponse<AdminData>;
 
 export interface CreateAdminRequest {
   username: string;
