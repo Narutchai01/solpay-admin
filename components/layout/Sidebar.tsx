@@ -10,6 +10,7 @@ import LogoAdminImage from '@/assets/images/logo-admin.png';
 import { Box, Typography, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { ModalComponent } from '../ui/Modal';
 import { Theme } from '@/theme/theme';
+import { adminService } from '@/services/adminService';
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -17,8 +18,9 @@ export function Sidebar() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const handleConfirmLogout = () => {
+    adminService.logout();
     setIsLogoutModalOpen(false);
-    router.push('/login');
+    router.replace('/login');
   };
 
   return (
