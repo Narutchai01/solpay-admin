@@ -1,9 +1,4 @@
-interface BaseResponse<T> {
-  code: number;
-  message: string;
-  data: T;
-  error: string | null;
-}
+import { BaseResponse } from "./common";
 
 export type LoginResponse = BaseResponse<{ token: string }>;
 
