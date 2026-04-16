@@ -13,7 +13,7 @@ import { Lock, Eye, EyeOff, User } from "lucide-react";
 import InputWithIcon from "./InputWithIcon";
 import { Theme as CustomTheme } from "@/theme/theme";
 import { useAuth } from "@/hooks/useAuth";
-import { CreateAdminRequest } from "@/types/admin";
+import { CreateAdminRequest } from "@/types/auth";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
