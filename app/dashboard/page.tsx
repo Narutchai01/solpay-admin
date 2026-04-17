@@ -65,7 +65,15 @@ export default function DashboardPage() {
           {isLoading ? (
             <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
           ) : (
-            <StatCard label="Total Fee (USDT)" value={"0.00"} />
+            <StatCard
+              label="Total Fee (USDT)"
+              value={
+                summary?.totalFee?.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"
+              }
+            />
           )}
         </Grid>
 
@@ -74,7 +82,10 @@ export default function DashboardPage() {
           {isLoading ? (
             <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
           ) : (
-            <StatCard label="Monthly Transaction" value={"0"} />
+            <StatCard
+              label="Monthly Transaction"
+              value={summary?.totalCompletedCount?.toLocaleString() || "0"}
+            />
           )}
         </Grid>
       </Grid>
