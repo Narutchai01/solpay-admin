@@ -32,3 +32,20 @@ export type TransactionResponse = BaseResponse<{
   pageSize: number;
   total: number;
 }>;
+
+export interface ChartDataItem {
+  date: string;
+  label: string; 
+  deposit: number;
+  withdraw: number;
+}
+
+export interface SummaryResponseData {
+  chartData: ChartDataItem[];
+  summary: {
+    totalDeposit: number;
+    totalWithdraw: number;
+  };
+}
+
+export type SummaryResponse = BaseResponse<SummaryResponseData>;
