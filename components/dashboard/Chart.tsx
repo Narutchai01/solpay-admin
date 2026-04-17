@@ -14,6 +14,7 @@ import {
   Legend,
   ResponsiveContainer,
   LabelList,
+  LabelProps,
 } from "recharts";
 import { Theme } from "@/theme/theme";
 import { SummaryResponseData } from "@/types/transaction";
@@ -56,6 +57,15 @@ export function Chart({
   data,
   isLoading,
 }: ChartProps) {
+  const formatLabel: LabelProps["formatter"] = (value) => {
+    const num = Number(value);
+    if (!num) return "";
+    return num.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   return (
     <Card
       sx={{
@@ -142,6 +152,7 @@ export function Chart({
                   fill={Theme.colors.g300}
                   fontSize={11}
                   offset={10}
+                  formatter={formatLabel}
                 />
               </Line>
 
@@ -160,6 +171,7 @@ export function Chart({
                   fill={Theme.colors.g300}
                   fontSize={11}
                   offset={10}
+                  formatter={formatLabel}
                 />
               </Line>
             </LineChart>
