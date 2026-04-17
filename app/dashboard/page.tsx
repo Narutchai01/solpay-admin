@@ -1,27 +1,76 @@
-import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
-import { StatCard } from '@/components/dashboard/StatCard';
-import { Chart } from '@/components/dashboard/Chart';
+"use client";
+
+import React from "react";
+import { Box, Typography, Grid, Skeleton } from "@mui/material";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { Chart } from "@/components/dashboard/Chart";
+import { useTransactionSummary } from "@/hooks/useTransactionSummary";
 
 export default function DashboardPage() {
+  const currentMonth = String(new Date().getMonth() + 1).padStart(2, "0");
+  const currentYear = String(new Date().getFullYear());
+  const { data, isLoading } = useTransactionSummary(currentMonth, currentYear);
+  const summary = data?.summary;
+
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       <Typography variant="h1" sx={{ fontWeight: 700 }}>
         Overview
       </Typography>
-       
+
       <Grid container spacing={3}>
+        {/* Total Deposits (USDT) */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <StatCard label="Total USDT" value="100,000.00" />
+          {isLoading ? (
+            <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
+          ) : (
+            <StatCard
+              label="Total Deposits (USDT)"
+              value={summary?.totalDeposit?.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) || "0.00"}
+            />
+          )}
         </Grid>
+
+        {/* Total Withdrawals (THB) */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <StatCard label="Total THB" value="8,000.00" />
+          {isLoading ? (
+            <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
+          ) : (
+            <StatCard
+              label="Total Withdrawals (THB)"
+              value={summary?.totalWithdraw?.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) || "0.00"}
+            />
+          )}
         </Grid>
+
+        {/* Total Fee (USDT) */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <StatCard label="Total Fee (USDT)" value="10,000.00" />
+          {isLoading ? (
+            <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
+          ) : (
+            <StatCard
+              label="Total Fee (USDT)"
+              value={"0.00"}
+            />
+          )}
         </Grid>
+
+        {/* Monthly Transaction */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <StatCard label="Monthly Transaction" value="150" />
+          {isLoading ? (
+            <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
+          ) : (
+            <StatCard
+              label="Monthly Transaction"
+              value={"0"}
+            />
+          )}
         </Grid>
       </Grid>
 
