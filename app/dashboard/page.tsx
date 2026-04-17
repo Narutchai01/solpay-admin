@@ -1,15 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Grid, Skeleton } from "@mui/material";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Chart } from "@/components/dashboard/Chart";
 import { useTransactionSummary } from "@/hooks/useTransactionSummary";
 
 export default function DashboardPage() {
-  const currentMonth = String(new Date().getMonth() + 1).padStart(2, "0");
-  const currentYear = String(new Date().getFullYear());
-  const { data, isLoading } = useTransactionSummary(currentMonth, currentYear);
+  const [selectedMonth, setSelectedMonth] = useState(
+    String(new Date().getMonth() + 1).padStart(2, "0"),
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    String(new Date().getFullYear()),
+  );
+  const { data, isLoading } = useTransactionSummary(
+    selectedMonth,
+    selectedYear,
+  );
   const summary = data?.summary;
 
   return (
@@ -26,10 +33,12 @@ export default function DashboardPage() {
           ) : (
             <StatCard
               label="Total Deposits (USDT)"
-              value={summary?.totalDeposit?.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) || "0.00"}
+              value={
+                summary?.totalDeposit?.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"
+              }
             />
           )}
         </Grid>
@@ -41,10 +50,12 @@ export default function DashboardPage() {
           ) : (
             <StatCard
               label="Total Withdrawals (THB)"
-              value={summary?.totalWithdraw?.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) || "0.00"}
+              value={
+                summary?.totalWithdraw?.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }) || "0.00"
+              }
             />
           )}
         </Grid>
@@ -54,10 +65,7 @@ export default function DashboardPage() {
           {isLoading ? (
             <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
           ) : (
-            <StatCard
-              label="Total Fee (USDT)"
-              value={"0.00"}
-            />
+            <StatCard label="Total Fee (USDT)" value={"0.00"} />
           )}
         </Grid>
 
@@ -66,10 +74,7 @@ export default function DashboardPage() {
           {isLoading ? (
             <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
           ) : (
-            <StatCard
-              label="Monthly Transaction"
-              value={"0"}
-            />
+            <StatCard label="Monthly Transaction" value={"0"} />
           )}
         </Grid>
       </Grid>
@@ -78,7 +83,14 @@ export default function DashboardPage() {
         <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
           Monthly Summary
         </Typography>
-        <Chart />
+        <Chart
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+          data={data}
+          isLoading={isLoading}
+        />
       </Box>
     </Box>
   );
