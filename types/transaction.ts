@@ -45,6 +45,8 @@ export interface SummaryResponseData {
   summary: {
     totalDeposit: number;
     totalWithdraw: number;
+    totalFee: number;
+    totalCompletedCount: number;
   };
 }
 
