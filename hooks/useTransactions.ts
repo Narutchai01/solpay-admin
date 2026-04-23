@@ -5,11 +5,10 @@ import { transactionService } from "@/services/transactionService";
 export const useTransactions = (page = 1, pageSize = 10, txType?: string) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchTransactions = useCallback(async () => {
-    setIsLoading(true);
     setError(null);
 
     try {

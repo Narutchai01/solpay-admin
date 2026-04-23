@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, ArrowRightLeft } from 'lucide-react';
+import { LayoutDashboard, ArrowRightLeft, UserCheck } from 'lucide-react';
 
 export const menuItems = [
   {
@@ -12,4 +12,9 @@ export const menuItems = [
     icon: <ArrowRightLeft size={24} />, 
     href: '/dashboard/transactions',
   },
+  {
+    name: 'Approve',
+    icon: <UserCheck size={24} />, 
+    href: '/dashboard/approve',
+  }
 ];
