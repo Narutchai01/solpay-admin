@@ -9,10 +9,10 @@ import {
   Tab,
   Alert,
   Skeleton,
-  CircularProgress,
 } from "@mui/material";
 import { TableComponent, Column } from "@/components/dashboard/Table";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { TransactionLoading } from "@/components/dashboard/TransactionLoading";
 import { Theme } from "@/theme/theme";
 import { useTransactions } from "@/hooks/useTransactions";
 import {
@@ -220,31 +220,14 @@ export default function TransactionsPage() {
       {/* Table Section */}
       <Box sx={{ position: "relative", minHeight: "400px" }}>
         {isLoading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "400px",
-              flexDirection: "column",
-              gap: 2,
-            }}
-          >
-            <CircularProgress
-              size={60}
-              thickness={4}
-              sx={{ color: Theme.colors.v400 }}
-            />
-            <Typography sx={{ color: Theme.colors.g200, fontWeight: 500 }}>
-              Loading transactions...
-            </Typography>
-          </Box>
+          <TransactionLoading />
         ) : (
           <TableComponent
             key={activeTab}
             columns={dynamicColumns}
             data={filteredTransactions}
             rowsPerPage={10}
+            emptyMessage="No transactions found"
           />
         )}
       </Box>

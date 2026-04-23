@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Box, Typography, Grid, Skeleton } from "@mui/material";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Chart } from "@/components/dashboard/Chart";
+import { TransactionLoading } from "@/components/dashboard/TransactionLoading";
 import { useTransactionSummary } from "@/hooks/useTransactionSummary";
 
 export default function DashboardPage() {
@@ -94,14 +95,21 @@ export default function DashboardPage() {
         <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
           Monthly Summary
         </Typography>
-        <Chart
-          selectedMonth={selectedMonth}
-          setSelectedMonth={setSelectedMonth}
-          selectedYear={selectedYear}
-          setSelectedYear={setSelectedYear}
-          data={data}
-          isLoading={isLoading}
-        />
+        
+        <Box sx={{ position: "relative", minHeight: "400px" }}>
+          {isLoading ? (
+            <TransactionLoading />
+          ) : (
+            <Chart
+              selectedMonth={selectedMonth}
+              setSelectedMonth={setSelectedMonth}
+              selectedYear={selectedYear}
+              setSelectedYear={setSelectedYear}
+              data={data}
+              isLoading={isLoading} 
+            />
+          )}
+        </Box>
       </Box>
     </Box>
   );
