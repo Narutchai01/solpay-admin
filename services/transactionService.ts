@@ -22,4 +22,12 @@ export const transactionService = {
     }
     return res.data;
   },
+
+  async getTransactionById(uuid: string) {
+    const res = await transactionRepository.getTransactionById(uuid);
+    if (res.code >= 400) {
+      throw new Error(res.message || "Failed to fetch transaction detail");
+    }
+    return res.data;
+  },
 };

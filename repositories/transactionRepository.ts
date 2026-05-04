@@ -1,5 +1,9 @@
 import apiClient from "@/lib / axios";
-import { SummaryResponse, TransactionResponse } from "@/types/transaction";
+import {
+  SummaryResponse,
+  TransactionDetailResponse,
+  TransactionResponse,
+} from "@/types/transaction";
 
 export const transactionRepository = {
   getTransactions: (params?: {
@@ -16,5 +20,10 @@ export const transactionRepository = {
       .get<SummaryResponse>("/transactions/summary", {
         params: { month, year },
       })
+      .then((res) => res.data),
+
+  getTransactionById: (uuid: string) =>
+    apiClient
+      .get<TransactionDetailResponse>(`/transactions/${uuid}`)
       .then((res) => res.data),
 };
