@@ -35,7 +35,7 @@ export type TransactionResponse = BaseResponse<{
 
 export interface ChartDataItem {
   date: string;
-  label: string; 
+  label: string;
   deposit: number;
   withdraw: number;
 }
@@ -51,3 +51,30 @@ export interface SummaryResponseData {
 }
 
 export type SummaryResponse = BaseResponse<SummaryResponseData>;
+
+export interface AccountInfo {
+  id: number;
+  public_address: string;
+  is_kyc_verified: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TransactionDetail extends Transaction {
+  category: {
+    id: number;
+    name: string;
+  };
+  account: AccountInfo;
+  transaction_on_chain?: {
+    tx_hash: string;
+    signature: string;
+  };
+  transaction_off_chain?: {
+    prompt_pay_id: string;
+    slip_url: string;
+  };
+  updated_at: string;
+}
+
+export type TransactionDetailResponse = BaseResponse<TransactionDetail>;
