@@ -76,7 +76,7 @@ export default function ApproveUserPage() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Typography variant="h1" sx={{ fontWeight: 700 }}>
+        <Typography variant="h3" sx={{ fontWeight: 700 }}>
           User Approvals
         </Typography>
       </Box>

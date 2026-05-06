@@ -116,13 +116,13 @@ const DetailRow = ({
     }}
   >
     <Typography
-      sx={{ fontSize: Theme.fontSize.textXL, opacity: 0.6, fontWeight: 500 }}
+      sx={{ fontSize: Theme.fontSize.textL, opacity: 0.6, fontWeight: 500 }}
     >
       {label}
     </Typography>
     <Typography
       sx={{
-        fontSize: Theme.fontSize.textXL,
+        fontSize: Theme.fontSize.textL,
         fontWeight: 600,
         overflow: "hidden",
         textOverflow: "ellipsis",

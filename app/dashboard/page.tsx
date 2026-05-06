@@ -21,8 +21,8 @@ export default function DashboardPage() {
   const summary = data?.summary;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-      <Typography variant="h1" sx={{ fontWeight: 700 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Typography variant="h3" sx={{ fontWeight: 700 }}>
         Overview
       </Typography>
 
@@ -92,7 +92,7 @@ export default function DashboardPage() {
       </Grid>
 
       <Box sx={{ mt: 4 }}>
-        <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+        <Typography variant="h3" sx={{ mb: 3, fontWeight: 700 }}>
           Monthly Summary
         </Typography>
         
