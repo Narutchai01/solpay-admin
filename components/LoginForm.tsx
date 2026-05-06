@@ -46,15 +46,15 @@ export default function LoginForm() {
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
-        maxWidth: 560,
+        maxWidth: 350,
         mx: "auto",
-        gap: 5,
-        py: 6,
-        px: 3,
+        gap: 3,
+        py: 4,
+        px: 1,
       }}
     >
       <Typography
-        variant="h3"
+        variant="h4"
         component="h4"
         sx={{
           fontWeight: 700,
@@ -72,7 +72,7 @@ export default function LoginForm() {
       )}
 
       <Box
-        sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 3 }}
+        sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 1 }}
       >
         <InputWithIcon
           id="login-username"
@@ -80,7 +80,7 @@ export default function LoginForm() {
           name="username"
           type="text"
           placeholder="Enter your username"
-          leftIcon={<User size={20} />}
+          leftIcon={<User size={18} />}
           value={formData.username}
           onChange={handleChange}
           required
@@ -92,7 +92,7 @@ export default function LoginForm() {
           name="password"
           type={showPassword ? "text" : "password"}
           placeholder="Enter your password"
-          leftIcon={<Lock size={20} />}
+          leftIcon={<Lock size={18} />}
           value={formData.password}
           onChange={handleChange}
           required
@@ -100,8 +100,9 @@ export default function LoginForm() {
             <IconButton
               size="small"
               onClick={() => setShowPassword(!showPassword)}
+              sx={{ mt:0.3}}
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </IconButton>
           }
         />
@@ -114,11 +115,11 @@ export default function LoginForm() {
             bgcolor: CustomTheme.colors.v300,
             color: CustomTheme.colors.g300,
             fontWeight: 700,
-            py: 1.5,
+            py: 1,
             borderRadius: 3,
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             textTransform: "none",
-            fontSize: "1rem",
+            fontSize: CustomTheme.fontSize.textM,
             mt: 2,
             "&:hover": { bgcolor: CustomTheme.colors.v400 },
           }}

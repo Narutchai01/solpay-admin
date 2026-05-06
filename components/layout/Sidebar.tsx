@@ -35,13 +35,13 @@ export function Sidebar() {
     <Box
       component="aside"
       sx={{
-        width: 256,
+        width: 200,
         height: "100vh",
         bgcolor: Theme.colors.surface,
         borderRight: `1px solid ${Theme.colors.g50}`,
         display: "flex",
         flexDirection: "column",
-        py: 4,
+        py: 3,
         position: "fixed",
         left: 0,
         top: 0,
@@ -53,14 +53,14 @@ export function Sidebar() {
       <Box
         sx={{
           width: "100%",
-          height: 80,
+          height: 60,
           mb: 4,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Box sx={{ position: "relative", width: 200, height: 80 }}>
+        <Box sx={{ position: "relative", width: 130, height: 50}}>
           <Image
             src={LogoAdminImage}
             alt="Logo Admin Image"
@@ -109,13 +109,13 @@ export function Sidebar() {
                   },
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 40, color: "inherit" }}>
+                <ListItemIcon sx={{ minWidth: 30, color: "inherit" }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText
                   primary={item.name}
                   primaryTypographyProps={{
-                    fontSize: "1rem",
+                    fontSize: Theme.fontSize.textM,
                     fontWeight: isActive ? 700 : 600,
                   }}
                 />
@@ -126,16 +126,15 @@ export function Sidebar() {
       </List>
 
       {/* Logout Button */}
-      <Box sx={{ px: 4, mt: "auto" }}>
+      <Box sx={{ px: 2, mt: "auto" }}>
         <Button
           fullWidth
-          startIcon={<LogOut size={24} />}
+          startIcon={<LogOut size={18} />}
           onClick={() => setIsLogoutModalOpen(true)}
           sx={{
-            justifyContent: "flex-start",
+            justifyContent: "center",
             color: Theme.colors.g100,
-            py: 1.5,
-            px: 2,
+            py: 1,
             borderRadius: 3,
             textTransform: "none",
             "&:hover": {
@@ -144,7 +143,7 @@ export function Sidebar() {
             },
           }}
         >
-          <Typography variant="body2" sx={{ fontWeight: 600 }}>
+          <Typography sx={{ fontSize: Theme.fontSize.textS, fontWeight: 600 }}>
             Log Out
           </Typography>
         </Button>

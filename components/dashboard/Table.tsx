@@ -40,7 +40,7 @@ export function TableComponent<T extends { id: string | number }>({
 }: DataTableProps<T>) {
   const headerCellSx = {
     color: "white",
-    fontSize: Theme.fontSize.h6,
+    fontSize: Theme.fontSize.h7,
     fontWeight: 700,
   };
   const safeData = Array.isArray(data) ? data : [];
@@ -107,7 +107,7 @@ export function TableComponent<T extends { id: string | number }>({
                       key={String(col.id)}
                       sx={{
                         color: Theme.colors.g500,
-                        fontSize: Theme.fontSize.textL,
+                        fontSize: Theme.fontSize.textS,
                       }}
                     >
                       {col.renderCell
@@ -139,7 +139,7 @@ export function TableComponent<T extends { id: string | number }>({
             sx={{
               textTransform: "none",
               color: Theme.colors.g500,
-              fontSize: Theme.fontSize.textL,
+              fontSize: Theme.fontSize.textM,
               fontWeight: 600,
               "&:hover": { bgcolor: "transparent", color: Theme.colors.g500 },
             }}
@@ -156,7 +156,12 @@ export function TableComponent<T extends { id: string | number }>({
             shape="rounded"
             sx={{
               "& .MuiPaginationItem-root": {
-                fontSize: Theme.fontSize.textL,
+                minWidth: "28px",
+                height: "28px",
+                width: "28px",
+                margin: "0 2px",
+                borderRadius: "6px",
+                fontSize: "0.85rem",
                 fontWeight: 600,
                 color: Theme.colors.g500,
                 "&.Mui-selected": {

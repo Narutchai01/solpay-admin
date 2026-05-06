@@ -22,7 +22,8 @@ export default function LoginPage() {
         elevation={12} 
         sx={{
           width: '100%',
-          maxWidth: '1024px',
+          maxWidth: '700px',
+          maxHeight: '400px',
           backgroundColor: 'background.paper',
           borderRadius: '2rem',
           overflow: 'hidden',
@@ -35,7 +36,7 @@ export default function LoginPage() {
           sx={{
             position: 'relative',
             width: { xs: '100%', md: '50%' },
-            minHeight: { xs: '300px', md: '600px' },
+            minHeight: { xs: '300px', md: '400px' },
           }}
         >
           <Image

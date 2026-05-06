@@ -15,9 +15,9 @@ export default function DashboardLayout({
         component="main" 
         sx={{ 
           flexGrow: 1, 
-          ml: '256px', 
-          p: 4,
-          minHeight: '100vh'
+          ml: '200px', 
+          p: 4, 
+          minHeight: '100vh',
         }}
       >
         {children}

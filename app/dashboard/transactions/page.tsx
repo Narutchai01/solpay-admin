@@ -131,7 +131,7 @@ export default function TransactionsPage() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h1" sx={{ fontWeight: 700 }}>
+        <Typography variant="h3" sx={{ fontWeight: 700 }}>
           Transactions
         </Typography>
       </Box>
@@ -182,7 +182,7 @@ export default function TransactionsPage() {
           gap: 2,
         }}
       >
-        <Typography variant="h2" sx={{ fontWeight: 700 }}>
+        <Typography variant="h3" sx={{ fontWeight: 700 }}>
           Transaction Summary
         </Typography>
 
@@ -199,7 +199,7 @@ export default function TransactionsPage() {
             minHeight: "auto",
             "& .MuiTab-root": {
               textTransform: "none",
-              fontSize: Theme.fontSize.h6,
+              fontSize: Theme.fontSize.h7,
               fontWeight: 600,
               color: Theme.colors.g200,
               padding: "8px 24px",
