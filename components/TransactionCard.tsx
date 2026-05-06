@@ -37,7 +37,7 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
           mb: 2,
         }}
       >
-        {new Date(data.created_at).toLocaleString()}
+        {new Date(data.created_at).toLocaleString('en-US')}
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, mb: 3 }}>
@@ -71,7 +71,7 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
           variant="h3"
           sx={{ fontWeight: 800, color: Theme.colors.onSurface }}
         >
-          {data.thb_amount.toLocaleString(undefined, {
+          {data.thb_amount.toLocaleString('en-US', {
             minimumFractionDigits: 2,
           })}{" "}
           <Typography
@@ -88,11 +88,11 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
           <>
             <DetailRow
               label="USDT Amount"
-              value={`${data.usdt_amount.toLocaleString(undefined, { maximumFractionDigits: 6 })} USDT`}
+              value={`${data.usdt_amount.toLocaleString('en-US', { maximumFractionDigits: 6 })} USDT`}
             />
             <DetailRow
               label="Fee"
-              value={`${data.fee.toLocaleString(undefined, { maximumFractionDigits: 6 })} USDT`}
+              value={`${data.fee.toLocaleString('en-US', { maximumFractionDigits: 6 })} USDT`}
             />
           </>
         )}

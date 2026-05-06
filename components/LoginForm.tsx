@@ -75,6 +75,7 @@ export default function LoginForm() {
         sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 3 }}
       >
         <InputWithIcon
+          id="login-username"
           label="Username"
           name="username"
           type="text"
@@ -86,6 +87,7 @@ export default function LoginForm() {
         />
 
         <InputWithIcon
+          id="login-password"
           label="Password"
           name="password"
           type={showPassword ? "text" : "password"}

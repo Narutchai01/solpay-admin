@@ -35,7 +35,7 @@ export default function DashboardPage() {
             <StatCard
               label="Total Deposits (USDT)"
               value={
-                summary?.totalDeposit?.toLocaleString(undefined, {
+                summary?.totalDeposit?.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 }) || "0.00"
@@ -52,7 +52,7 @@ export default function DashboardPage() {
             <StatCard
               label="Total Withdrawals (THB)"
               value={
-                summary?.totalWithdraw?.toLocaleString(undefined, {
+                summary?.totalWithdraw?.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 }) || "0.00"
@@ -69,7 +69,7 @@ export default function DashboardPage() {
             <StatCard
               label="Total Fee (USDT)"
               value={
-                summary?.totalFee?.toLocaleString(undefined, {
+                summary?.totalFee?.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 }) || "0.00"
@@ -85,7 +85,7 @@ export default function DashboardPage() {
           ) : (
             <StatCard
               label="Monthly Transaction"
-              value={summary?.totalCompletedCount?.toLocaleString() || "0"}
+              value={summary?.totalCompletedCount?.toLocaleString('en-US') || "0"}
             />
           )}
         </Grid>

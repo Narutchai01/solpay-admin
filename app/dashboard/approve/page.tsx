@@ -27,7 +27,7 @@ export default function ApproveUserPage() {
         id: "registrationDate",
         label: "Registration Date",
         renderCell: (row) =>
-          new Date(row.birth_date).toLocaleString("th-TH"), 
+          new Date(row.birth_date).toLocaleString("en-US"), 
       },
       {
         id: "actions",
