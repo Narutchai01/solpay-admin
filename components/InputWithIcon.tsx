@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useId } from 'react';
 import { TextField, InputAdornment, Box, Typography, TextFieldProps } from '@mui/material';
 import { Theme as CustomTheme } from '@/theme/theme';
 
@@ -16,8 +16,12 @@ export default function InputWithIcon({
   rightIcon,
   error,
   helperText,
+  id: providedId,
   ...props
 }: InputWithIconProps) {
+  const generatedId = useId();
+  const id = providedId || generatedId;
+
   return (
     <Box sx={{ width: '100%', mb: 2 }}>
       <Typography 
@@ -28,11 +32,14 @@ export default function InputWithIcon({
           mb: 0.5, 
           ml: 0.5 
         }}
+        htmlFor={id}
+        component="label"
       >
         {label}
       </Typography>
       <TextField
         {...props}
+        id={id}
         variant="outlined"
         fullWidth
         error={error}

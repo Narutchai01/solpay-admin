@@ -39,24 +39,24 @@ export default function TransactionsPage() {
       {
         id: "usdt_amount",
         label: "USDT Amount",
-        renderCell: (row) => row.usdt_amount.toLocaleString(),
+        renderCell: (row) => row.usdt_amount.toLocaleString('en-US'),
       },
       {
         id: "thb_amount",
         label: "THB Amount",
-        renderCell: (row) => row.thb_amount.toLocaleString(),
+        renderCell: (row) => row.thb_amount.toLocaleString('en-US'),
       },
       {
         id: "fee",
         label: "Fee",
         renderCell: (row) => {
-          return row.fee ? row.fee.toLocaleString() : "0";
+          return row.fee ? row.fee.toLocaleString('en-US') : "0";
         },
       },
       {
         id: "created_at",
         label: "Date",
-        renderCell: (row) => new Date(row.created_at).toLocaleString("th-TH"),
+        renderCell: (row) => new Date(row.created_at).toLocaleString('en-US'),
       },
       {
         id: "status",
@@ -164,7 +164,7 @@ export default function TransactionsPage() {
                         ? "Transfer"
                         : "Swap"
                 }
-                value={Object.values(stats)[index].toLocaleString()}
+                value={Object.values(stats)[index].toLocaleString('en-US')}
               />
             )}
           </Grid>

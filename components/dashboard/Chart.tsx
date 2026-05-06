@@ -60,7 +60,7 @@ export function Chart({
   const formatLabel: LabelProps["formatter"] = (value) => {
     const num = Number(value);
     if (!num) return "";
-    return num.toLocaleString(undefined, {
+    return num.toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
