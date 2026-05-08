@@ -91,19 +91,23 @@ export default function InputWithIcon({
               "&.Mui-focused": {
                 bgcolor: "#D1D1D1",
               },
-             "& input": {
+              "& input": {
                 py: 1.2,
-                fontSize: CustomTheme.fontSize.textM, 
+                fontSize: CustomTheme.fontSize.textM,
                 color: CustomTheme.colors.g500,
                 "&::placeholder": {
                   color: CustomTheme.colors.g100,
                   opacity: 1,
-                  fontSize: CustomTheme.fontSize.textM, 
+                  fontSize: CustomTheme.fontSize.textM,
                 },
                 "&:-webkit-autofill": {
-                  WebkitBoxShadow: `0 0 0 100px #C0C0C0 inset`,
-                  WebkitTextFillColor: CustomTheme.colors.g500,
+                  transition: "background-color 5000s ease-in-out 0s",
+                  WebkitBoxShadow: `0 0 0 100px #C0C0C0 inset !important`,
+                  WebkitTextFillColor: `${CustomTheme.colors.g500} !important`,
                   borderRadius: "inherit",
+                },
+                "&:-webkit-autofill:hover, &:-webkit-autofill:focus": {
+                  WebkitBoxShadow: `0 0 0 100px #D1D1D1 inset !important`,
                 },
               },
             },

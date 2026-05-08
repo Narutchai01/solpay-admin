@@ -27,14 +27,14 @@ export default function TransformationPage({ params }: PageProps) {
       }}
     >
       <Stack sx={{ mb: 4, alignItems: "center", gap: 0.5 }}>
-        <Typography variant="h3" sx={{ fontWeight: 700 }}>
+        <Typography sx={{ fontSize: { xs: Theme.fontSize.h4, md: Theme.fontSize.h3 }, fontWeight: 700 }}>
           Solpay Transformation
         </Typography>
 
         {!isLoading && data && (
           <Typography
-            variant="h3"
             sx={{
+              fontSize: { xs: Theme.fontSize.h4, md: Theme.fontSize.h3 },
               fontWeight: 700,
               color: Theme.colors.v400,
               textTransform: "lowercase",
