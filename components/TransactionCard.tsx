@@ -6,7 +6,7 @@ import { Theme } from "@/theme/theme";
 export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
   const isOnChain = data.transaction_type === TransactionType.ONCHAIN;
 
-  const formatAddress = (str?: string, start = 8, end = 8) => {
+  const formatAddress = (str?: string, start = 7, end = 7) => {
     if (!str) return "-";
     if (str.length <= start + end) return str;
     return `${str.slice(0, start)}.....${str.slice(-end)}`;
@@ -31,7 +31,7 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
     >
       <Typography
         sx={{
-          fontSize: Theme.fontSize.textM,
+          fontSize: { xs: Theme.fontSize.textS, md: Theme.fontSize.textM },
           opacity: 0.5,
           display: "block",
           mb: 2,
@@ -60,7 +60,7 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
       <Box sx={{ my: 3 }}>
         <Typography
           sx={{
-            fontSize: Theme.fontSize.textXL,
+            fontSize: { xs: Theme.fontSize.textM, md: Theme.fontSize.textL},
             opacity: 0.6,
             fontWeight: 500,
           }}
@@ -68,15 +68,14 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
           Total Amount
         </Typography>
         <Typography
-          variant="h3"
-          sx={{ fontWeight: 800, color: Theme.colors.onSurface }}
+          sx={{ fontSize: {xs: Theme.fontSize.h4, md: Theme.fontSize.h3}, fontWeight: 800, color: Theme.colors.onSurface }}
         >
           {data.thb_amount.toLocaleString('en-US', {
             minimumFractionDigits: 2,
           })}{" "}
           <Typography
             component="span"
-            sx={{ fontSize: Theme.fontSize.textXL, fontWeight: 500 }}
+            sx={{ fontSize: { xs: Theme.fontSize.textM, md: Theme.fontSize.textL }, fontWeight: 500 }}
           >
             THB
           </Typography>
@@ -116,13 +115,13 @@ const DetailRow = ({
     }}
   >
     <Typography
-      sx={{ fontSize: Theme.fontSize.textL, opacity: 0.6, fontWeight: 500 }}
+      sx={{ fontSize: { xs: Theme.fontSize.textS, md: Theme.fontSize.textM }, opacity: 0.6, fontWeight: 500 }}
     >
       {label}
     </Typography>
     <Typography
       sx={{
-        fontSize: Theme.fontSize.textL,
+        fontSize: { xs: Theme.fontSize.textS, md: Theme.fontSize.textM },
         fontWeight: 600,
         overflow: "hidden",
         textOverflow: "ellipsis",

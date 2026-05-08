@@ -39,24 +39,24 @@ export default function TransactionsPage() {
       {
         id: "usdt_amount",
         label: "USDT Amount",
-        renderCell: (row) => row.usdt_amount.toLocaleString('en-US'),
+        renderCell: (row) => row.usdt_amount.toLocaleString("en-US"),
       },
       {
         id: "thb_amount",
         label: "THB Amount",
-        renderCell: (row) => row.thb_amount.toLocaleString('en-US'),
+        renderCell: (row) => row.thb_amount.toLocaleString("en-US"),
       },
       {
         id: "fee",
         label: "Fee",
         renderCell: (row) => {
-          return row.fee ? row.fee.toLocaleString('en-US') : "0";
+          return row.fee ? row.fee.toLocaleString("en-US") : "0";
         },
       },
       {
         id: "created_at",
         label: "Date",
-        renderCell: (row) => new Date(row.created_at).toLocaleString('en-US'),
+        renderCell: (row) => new Date(row.created_at).toLocaleString("en-US"),
       },
       {
         id: "status",
@@ -118,6 +118,11 @@ export default function TransactionsPage() {
     if (activeTab === "top_up")
       return data.filter((tx) => tx.transaction_type === "TOPUP");
 
+    if (activeTab === "swap")
+      return data.filter((tx) =>
+        tx.transaction_type?.toLowerCase().includes("swap"),
+      );
+
     return data;
   }, [activeTab, transactions]);
 
@@ -164,7 +169,7 @@ export default function TransactionsPage() {
                         ? "Transfer"
                         : "Swap"
                 }
-                value={Object.values(stats)[index].toLocaleString('en-US')}
+                value={Object.values(stats)[index].toLocaleString("en-US")}
               />
             )}
           </Grid>
@@ -214,6 +219,7 @@ export default function TransactionsPage() {
           <Tab label="On App" value="on_app" />
           <Tab label="Software Wallet" value="software_wallet" />
           <Tab label="Top Up" value="top_up" />
+          <Tab label="Swap" value="swap" />
         </Tabs>
       </Box>
 

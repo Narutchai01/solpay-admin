@@ -182,7 +182,7 @@ export function TableComponent<T extends { id: string | number }>({
             sx={{
               textTransform: "none",
               color: Theme.colors.g500,
-              fontSize: Theme.fontSize.textL,
+              fontSize: Theme.fontSize.textM,
               fontWeight: 600,
               "&:hover": { bgcolor: "transparent", color: Theme.colors.g500 },
             }}

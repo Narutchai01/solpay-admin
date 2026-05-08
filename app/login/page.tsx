@@ -15,15 +15,15 @@ export default function LoginPage() {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Theme.colors.v75, 
-        padding: { xs: 2, md: 4 },
+        padding: { xs: 2, sm: 3, md: 4 }, 
       }}
     >
       <Paper
         elevation={12} 
         sx={{
           width: '100%',
-          maxWidth: '700px',
-          maxHeight: '400px',
+          maxWidth: { xs: '60%', md: '700px'},
+          minHeight: { xs: 'auto', md: '450px' },
           backgroundColor: 'background.paper',
           borderRadius: '2rem',
           overflow: 'hidden',
@@ -31,12 +31,14 @@ export default function LoginPage() {
           flexDirection: { xs: 'column', md: 'row' },
         }}
       >
-        {/* Left Section */}
+        {/* Left Section (Image) */}
         <Box
           sx={{
             position: 'relative',
             width: { xs: '100%', md: '50%' },
-            minHeight: { xs: '300px', md: '400px' },
+            // บนมือถือให้ลดความสูงภาพลง หรือซ่อนไปเลยถ้าอยากให้เข้าถึงฟอร์มเร็วขึ้น
+            height: { xs: '200px', md: 'auto' }, 
+            display: { xs: 'block', md: 'block' }
           }}
         >
           <Image
@@ -48,7 +50,7 @@ export default function LoginPage() {
           />
         </Box>
 
-        {/* Right Section */}
+        {/* Right Section (Form) */}
         <Box
           sx={{
             width: { xs: '100%', md: '50%' },
@@ -57,7 +59,7 @@ export default function LoginPage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: { xs: 0, md: 2 },
+            padding: { xs: 2, sm: 3, md: 4 }, // เพิ่ม padding ให้หายใจออก
           }}
         >
           <LoginForm />
