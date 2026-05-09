@@ -86,12 +86,12 @@ export const TransactionCard = ({ data }: { data: TransactionDetail }) => {
         {isOnChain && (
           <>
             <DetailRow
-              label="USDT Amount"
-              value={`${data.usdt_amount.toLocaleString('en-US', { maximumFractionDigits: 6 })} USDT`}
+              label="USDC Amount"
+              value={`${data.usdt_amount.toLocaleString('en-US', { maximumFractionDigits: 6 })} USDC`}
             />
             <DetailRow
               label="Fee"
-              value={`${data.fee.toLocaleString('en-US', { maximumFractionDigits: 6 })} USDT`}
+              value={`${data.fee.toLocaleString('en-US', { maximumFractionDigits: 6 })} USDC`}
             />
           </>
         )}
