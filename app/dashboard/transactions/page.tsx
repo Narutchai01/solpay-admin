@@ -38,7 +38,7 @@ export default function TransactionsPage() {
       { id: "transaction_type", label: "Type" },
       {
         id: "usdt_amount",
-        label: "USDT Amount",
+        label: "USDC Amount",
         renderCell: (row) => row.usdt_amount.toLocaleString("en-US"),
       },
       {

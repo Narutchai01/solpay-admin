@@ -27,13 +27,13 @@ export default function DashboardPage() {
       </Typography>
 
       <Grid container spacing={3}>
-        {/* Total Deposits (USDT) */}
+        {/* Total Deposits (USDC) */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           {isLoading ? (
             <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
           ) : (
             <StatCard
-              label="Total Deposits (USDT)"
+              label="Total Deposits (USDC)"
               value={
                 summary?.totalDeposit?.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
@@ -61,13 +61,13 @@ export default function DashboardPage() {
           )}
         </Grid>
 
-        {/* Total Fee (USDT) */}
+        {/* Total Fee (USDC) */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           {isLoading ? (
             <Skeleton variant="rounded" height={100} sx={{ borderRadius: 4 }} />
           ) : (
             <StatCard
-              label="Total Fee (USDT)"
+              label="Total Fee (USDC)"
               value={
                 summary?.totalFee?.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
