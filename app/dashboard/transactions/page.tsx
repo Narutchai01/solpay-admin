@@ -117,12 +117,7 @@ export default function TransactionsPage() {
 
     if (activeTab === "top_up")
       return data.filter((tx) => tx.transaction_type === "TOPUP");
-
-    if (activeTab === "swap")
-      return data.filter((tx) =>
-        tx.transaction_type?.toLowerCase().includes("swap"),
-      );
-
+    
     return data;
   }, [activeTab, transactions]);
 
@@ -219,7 +214,6 @@ export default function TransactionsPage() {
           <Tab label="On App" value="on_app" />
           <Tab label="Software Wallet" value="software_wallet" />
           <Tab label="Top Up" value="top_up" />
-          <Tab label="Swap" value="swap" />
         </Tabs>
       </Box>
 
