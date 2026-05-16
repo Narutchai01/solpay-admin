@@ -33,9 +33,9 @@ export default function TransactionsPage() {
 
   const dynamicColumns = useMemo(() => {
     const baseColumns: Column<Transaction>[] = [
-      { id: "transaction_uuid", label: "Transaction ID" },
-      { id: "account_id", label: "User ID" },
-      { id: "transaction_type", label: "Type" },
+       { id: "transaction_uuid", label: "Transaction ID", width: 280 },
+      { id: "account_id", label: "User ID", width: 100  },
+      { id: "transaction_type", label: "Type", width: 110 },
       {
         id: "usdt_amount",
         label: "USDC Amount",
@@ -56,7 +56,7 @@ export default function TransactionsPage() {
       {
         id: "created_at",
         label: "Date",
-        renderCell: (row) => new Date(row.created_at).toLocaleString("en-US"),
+        renderCell: (row) => new Date(row.created_at).toLocaleString("en-US"), width: 170
       },
       {
         id: "status",
@@ -74,7 +74,7 @@ export default function TransactionsPage() {
               {row.status}
             </span>
           );
-        },
+        }, width: 130 
       },
     ];
 
