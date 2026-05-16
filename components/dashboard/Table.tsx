@@ -14,6 +14,7 @@ import {
   Pagination,
   PaginationProps,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -22,6 +23,7 @@ import { Theme } from "@/theme/theme";
 export interface Column<T> {
   id: keyof T | string;
   label: string;
+  width?: number;
   renderCell?: (row: T) => React.ReactNode;
 }
 
@@ -31,6 +33,26 @@ interface DataTableProps<T> {
   rowsPerPage?: number;
   emptyMessage?: string;
 }
+
+const formatTooltipValue = (value: unknown): string => {
+  const str = String(value || "");
+
+  let normalized = str;
+  if (str.includes("e+") || str.includes("e-")) {
+    try {
+      normalized = BigInt(Math.round(Number(str))).toString();
+    } catch {
+      return str;
+    }
+  }
+
+  const num = Number(normalized);
+  if (!isNaN(num) && normalized.trim() !== "") {
+    return num.toLocaleString("en-US");
+  }
+
+  return normalized;
+};
 
 export function TableComponent<T extends { id: string | number }>({
   columns,
@@ -42,7 +64,18 @@ export function TableComponent<T extends { id: string | number }>({
     color: "white",
     fontSize: Theme.fontSize.h7,
     fontWeight: 700,
+    whiteSpace: "nowrap" as const,
   };
+
+  const bodyCellSx = {
+    color: Theme.colors.g500,
+    fontSize: Theme.fontSize.textS,
+    width: 320,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap" as const,
+  };
+
   const safeData = Array.isArray(data) ? data : [];
 
   const [page, setPage] = useState(1);
@@ -65,14 +98,17 @@ export function TableComponent<T extends { id: string | number }>({
           boxShadow: "none",
           border: `1px solid ${Theme.colors.g50}`,
           borderRadius: 4,
+          overflowX: "auto",
         }}
       >
-        <Table sx={{ minWidth: 650 }}>
-          {/* Header */}
+        <Table sx={{ minWidth: 650, tableLayout: "fixed" }}>
           <TableHead>
             <TableRow sx={{ bgcolor: Theme.colors.purple }}>
               {columns.map((col) => (
-                <TableCell key={String(col.id)} sx={headerCellSx}>
+                <TableCell
+                  key={String(col.id)}
+                  sx={{ ...headerCellSx, width: col.width }}
+                >
                   {col.label}
                 </TableCell>
               ))}
@@ -102,19 +138,32 @@ export function TableComponent<T extends { id: string | number }>({
                   key={row.id}
                   sx={{ "&:hover": { bgcolor: Theme.colors.g50 } }}
                 >
-                  {columns.map((col) => (
-                    <TableCell
-                      key={String(col.id)}
-                      sx={{
-                        color: Theme.colors.g500,
-                        fontSize: Theme.fontSize.textS,
-                      }}
-                    >
-                      {col.renderCell
-                        ? col.renderCell(row)
-                        : String(row[col.id as keyof T] || "")}
-                    </TableCell>
-                  ))}
+                  {columns.map((col) => {
+                    const rawValue = formatTooltipValue(row[col.id as keyof T]);
+                    return (
+                      <TableCell
+                        key={String(col.id)}
+                        sx={{ ...bodyCellSx, width: col.width }}
+                      >
+                        <Tooltip
+                          title={rawValue}
+                          placement="top-start"
+                          slotProps={{
+                            tooltip: {
+                              sx: {
+                                maxWidth: 300,
+                                wordBreak: "break-all",
+                              },
+                            },
+                          }}
+                        >
+                          <span>
+                            {col.renderCell ? col.renderCell(row) : rawValue}
+                          </span>
+                        </Tooltip>
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))
             )}
@@ -141,7 +190,7 @@ export function TableComponent<T extends { id: string | number }>({
               color: Theme.colors.g500,
               fontSize: Theme.fontSize.textM,
               fontWeight: 600,
-              "&:hover": { bgcolor: "transparent", color: Theme.colors.g500 },
+              "&:hover": { bgcolor: "transparent" },
             }}
           >
             Previous
@@ -167,9 +216,7 @@ export function TableComponent<T extends { id: string | number }>({
                 "&.Mui-selected": {
                   bgcolor: Theme.colors.g200,
                   color: "white",
-                  "&:hover": {
-                    bgcolor: Theme.colors.g200,
-                  },
+                  "&:hover": { bgcolor: Theme.colors.g200 },
                 },
               },
             }}
@@ -184,7 +231,7 @@ export function TableComponent<T extends { id: string | number }>({
               color: Theme.colors.g500,
               fontSize: Theme.fontSize.textM,
               fontWeight: 600,
-              "&:hover": { bgcolor: "transparent", color: Theme.colors.g500 },
+              "&:hover": { bgcolor: "transparent" },
             }}
           >
             Next
