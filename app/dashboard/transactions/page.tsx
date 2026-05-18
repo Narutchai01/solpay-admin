@@ -33,7 +33,7 @@ export default function TransactionsPage() {
 
   const dynamicColumns = useMemo(() => {
     const baseColumns: Column<Transaction>[] = [
-       { id: "transaction_uuid", label: "Transaction ID", width: 280 },
+      { id: "transaction_uuid", label: "Transaction ID", width: 280 },
       { id: "account_id", label: "User ID", width: 100  },
       { id: "transaction_type", label: "Type", width: 110 },
       {
@@ -99,9 +99,6 @@ export default function TransactionsPage() {
           t.transaction_type as TransactionType,
         ),
       ).length,
-      swap: data.filter((t) =>
-        t.transaction_type?.toLowerCase().includes("swap"),
-      ).length,
     };
   }, [transactions, total]);
 
@@ -145,8 +142,8 @@ export default function TransactionsPage() {
 
       {/* Statistics Cards */}
       <Grid container spacing={3}>
-        {[1, 2, 3, 4].map((item, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+        {[1, 2, 3].map((item, index) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
             {isLoading ? (
               <Skeleton
                 variant="rounded"
@@ -160,9 +157,7 @@ export default function TransactionsPage() {
                     ? "Total"
                     : index === 1
                       ? "Top Up"
-                      : index === 2
-                        ? "Transfer"
-                        : "Swap"
+                      : "Transfer"
                 }
                 value={Object.values(stats)[index].toLocaleString("en-US")}
               />
